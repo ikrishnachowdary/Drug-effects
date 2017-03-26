@@ -1,5 +1,5 @@
 library(readxl)
-data<-read_excel("C:/Users/chatr/Downloads/HW2 data.xlsx",sheet=1,col_names=T,col_types = NULL)
+data<-read_excel("C:/Users/chatr/Downloads/drug data.xlsx",sheet=1,col_names=T,col_types = NULL)
 data<-data[,1:10]
 summary(data)
 str(data)
@@ -75,10 +75,9 @@ pve<-pca_obj$sdev^2/sum(pca_obj$sdev^2)
 plot(pve,ylim=c(0,1),type = 'b')
 #we can choose to keep 2 PCs as it explains as much as 81% variance
 
-#Q6:
+#Singular Value Decomposition:
 svd=svd(data[,c(2,5,7)])
 
-#Q7
 #ANOVA test-Parametric test:
 anova1<-aov(data[,9]~data[,1])
 TukeyHSD(anova1)
@@ -87,7 +86,7 @@ plot(TukeyHSD(anova1),las=1)
 ###is fairly the same with/without Clopidogrel###
 
 
-#Q8 #Analyses of outcome of total blood loss:
+#Analyses of outcome of total blood loss:
 reg1<-lm(log24EBL~.,data=data[,-c(9)])
 pred1<-predict(reg1,data[,-c(9)])
 err1<-mean((pred1-data[,10])^2) #0.019337959
